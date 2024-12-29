@@ -1,6 +1,8 @@
 # ------
 # Author
 
+"""Это автор"""
+
 type Author {
     id: ID!
     name: String!
@@ -63,6 +65,7 @@ type Review {
 # ---
 
 type Query {
+    """Запрос всех авторов"""
     getAuthors: [Author!]!
     getAuthorById(authorId: ID!): Author
     getAuthorByName(authorName: String!): [Author!]!
