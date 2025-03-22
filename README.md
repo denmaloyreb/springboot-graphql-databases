@@ -1,6 +1,6 @@
 # Репозиторий для тренировки в документировании GraphQL API
 
-Этот репозиторий предназначен для технических писателей, которые хотят получить опыт работы с GraphQL API и потренироваться в документировании такого API. Это — форк репозитория [https://github.com/ivangfr/springboot-graphql-databases](https://github.com/ivangfr/springboot-graphql-databases).
+Этот репозиторий предназначен для технических писателей, которые хотят получить опыт работы с GraphQL API и потренироваться в документировании такого API.
 
 Вы сможете запустить на локальном компьютере приложение с GraphQL API, с которым можно взаимодействовать через графический интерфейс QraphiQL Playground или по HTTP (с помощью Postman, Curl и пр.).
 В этом API также работает запрос интроспекции.
@@ -82,3 +82,5 @@
   ```bash
   docker compose down -v
   ```
+
+Репозиторий создан на базе форка репозитория [https://github.com/ivangfr/springboot-graphql-databases](https://github.com/ivangfr/springboot-graphql-databases).
