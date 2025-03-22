@@ -39,7 +39,6 @@ input ReviewInput {
 type Query {
     getBooks: [Book]
     getBookById(bookId:ID!): Book
-
     getBookByIsbn(bookIsbn:String!): Book
 }
 
@@ -49,6 +48,5 @@ type Mutation {
     createBook(bookInput:CreateBookInput!): Book!
     updateBook(bookId:ID!, bookInput:UpdateBookInput!): Book!
     deleteBook(bookId:ID!): Book!
-
     addBookReview(bookId:ID!, reviewInput: ReviewInput): Book!
 }

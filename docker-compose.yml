@@ -1,7 +1,7 @@
 services:
 
   mysql:
-    platform: linux/amd64
+    # platform: linux/amd64
     container_name: 'mysql'
     image: 'mysql:9.1.0'
     ports:
@@ -15,7 +15,6 @@ services:
       test: 'mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}'
 
   mongodb:
-    # platform: linux/amd64
     image: 'mongo:latest'
     container_name: 'mongodb'
     ports:
@@ -29,7 +28,7 @@ services:
       test: "echo 'db.stats().ok' | mongosh localhost:27017/bookreviewdb --quiet"
 
   zipkin:
-    platform: linux/amd64
+    # platform: linux/amd64
     image: 'openzipkin/zipkin:3.4.1'
     container_name: 'zipkin'
     ports:

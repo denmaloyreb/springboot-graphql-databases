@@ -1,11 +1,25 @@
-# ------
-# Author
+# Комментарий, которого не будет видно
 
-"""Это автор"""
+"""
+# Укажем название типа как H1
+
+Текст описания и выделение важного **жирным** или *курсивом*.
+
+## Заголовок второго уровня
+
+Какой-то список:
+
+* Пункт 1
+* Пункт 2
+* Пункт 3
+"""
 
 type Author {
+    """Описание поля id"""
     id: ID!
+    """Описание поля name"""
     name: String!
+    """Описание поля books"""
     books: [Book!]!
 }
 
@@ -80,7 +94,27 @@ type Mutation {
     createAuthor(authorInput: CreateAuthorInput!): Author!
     updateAuthor(authorId: ID!, authorInput: UpdateAuthorInput!): Author!
     deleteAuthor(authorId: ID!): Author!
+    """
+    # Создание книги
 
+    Для создания книги передайте параметры, указанные в **input CreateBookInput**
+
+    Пример использования в запросе:
+
+    ```graphql
+    mutation {
+      createBook(
+        bookInput: { authorId: 1, isbn: "4567", title: "My book2", year: 2024 }
+      ) {
+        id
+        author {
+          id
+          name
+        }
+      }
+    }
+    ```
+    """
     createBook(bookInput: CreateBookInput!): Book!
     updateBook(bookId: ID!, bookInput: UpdateBookInput!): Book!
     deleteBook(bookId: ID!): Book!

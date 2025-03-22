@@ -1,270 +1,84 @@
-# springboot-graphql-databases
+# Репозиторий для тренировки в документировании GraphQL API
 
-The goal of this project is to explore [`GraphQL`](https://graphql.org). For it, we will implement two [`Spring Boot`](https://docs.spring.io/spring-boot/index.html) Web Java applications: `author-book-api` and `book-review-api`.
+Этот репозиторий предназначен для технических писателей, которые хотят получить опыт работы с GraphQL API и потренироваться в документировании такого API. Это — форк репозитория [https://github.com/ivangfr/springboot-graphql-databases](https://github.com/ivangfr/springboot-graphql-databases).
 
-> **Note**: In [`kubernetes-minikube-environment`](https://github.com/ivangfr/kubernetes-minikube-environment/tree/master/author-book-review-graphql) repository, it's shown how to deploy this project in `Kubernetes` (`Minikube`).
+Вы сможете запустить на локальном компьютере приложение с GraphQL API, с которым можно взаимодействовать через графический интерфейс QraphiQL Playground или по HTTP (с помощью Postman, Curl и пр.).
+В этом API также работает запрос интроспекции.
 
-## Proof-of-Concepts & Articles
+![QraphiQL Playground](api_image.png)
 
-On [ivangfr.github.io](https://ivangfr.github.io), I have compiled my Proof-of-Concepts (PoCs) and articles. You can easily search for the technology you are interested in by using the filter. Who knows, perhaps I have already implemented a PoC or written an article about what you are looking for.
+## Требования к компьютеру для развертывания и запуска приложения
 
-## Additional Readings
+Чтобы приложение запустилось на локальном компьютере, он должен соответствовать следующим требованиям:
 
-- \[**Medium**\] [**Implementing and Securing a Spring Boot GraphQL API with Keycloak**](https://medium.com/@ivangfr/implementing-and-securing-a-spring-boot-graphql-api-with-keycloak-c461c86e3972)
-- \[**Medium**\] [**Implementing and Securing a Spring Boot GraphQL API with Okta**](https://medium.com/@ivangfr/implementing-and-securing-a-spring-boot-graphql-api-with-okta-78bc997359b4)
+- Наличие [`Java 21+`](https://www.oracle.com/java/technologies/downloads/#java21).
+- Наличие [`Docker`](https://www.docker.com).
 
-## Project Diagram
+## Где документировать GraphQL API, чтобы увидеть результат при запуске приложения
 
-![project-diagram](documentation/project-diagram.jpeg)
+Схема API находится в файле `author-book.graphqls` в папке `springboot-graphql-databases/author-book-api/src/main/resources/graphql`.
+С ним вам и предстоит работать.
+В файле уже есть есть несколько примеров комментариев, которые можно использовать как основу при документировании GraphQL API.
+При написании комментариев используйте синтаксис [Commonmark](https://commonmark.org/help/).
 
-## Applications
+## Как запустить приложение с GraphQL API
 
-- ### author-book-api
+> Если у вас MacBook с `M`-процессором, перед запуском приложения в файле `springboot-graphql-databases/docker-compose.yml` раскомментируйте строки, содержащие `platform: linux/amd64` (строки 4 и 31).
 
-  `Spring Boot` Web Java application that handles `authors` and `books`. It exposes a `GraphQL` endpoint **and** traditional REST API endpoints. `author-book-api` uses [`MySQL`](https://www.mysql.com) as storage and calls `book-review-api` to get the reviews of the books. It uses [`Feign`](https://github.com/OpenFeign/feign) to easily create a client for `book-review-api` and [`Resilience4j`](https://github.com/resilience4j/resilience4j) (fault tolerance library) to handle fallback when `book-review-api` is down. The book `ISBN` is what connects books stored in `author-book-api` with the ones stored in `book-review-api`.
+Для запуска приложения выполните следующие действия:
 
-- ### book-review-api
+1. Откройте терминал в корне этой папки и выполните команду:
 
-  `Spring Boot` Web Java application that handles `books` and their `reviews`. It only exposes a `GraphQL` API and uses [`MongoDB`](https://www.mongodb.com) as storage.
-
-## Frontend applications
-
-In the repository [`react-graphql-databases`](https://github.com/ivangfr/react-graphql-databases), I have implemented two [`ReactJS`](https://react.dev) applications `author-book-ui` and `book-review-ui` that are frontend applications for `author-book-api` and `book-review-api`, respectively.
-
-If you want to see the complete communication frontend-backend using `GraphQL`, clone the `react-graphql-databases` and follow the README instructions.
-
-## Prerequisites
-
-- [`Java 21+`](https://www.oracle.com/java/technologies/downloads/#java21)
-- Some containerization tool [`Docker`](https://www.docker.com), [`Podman`](https://podman.io), etc.
-
-## Start Environment
-
-- Open a terminal and inside `springboot-graphql-databases` root folder run:
-  ```
+  ```shell
   docker compose up -d
   ```
 
-- Wait for Docker containers to be up and running. To check it, run:
-  ```
+2. Убедитесь, что все контейнеры запущены. Для этого выполните команду:
+  
+  ```shell
   docker ps -a
   ```
   
-## Run applications with Maven
+    Вывод команды должен выглядеть примерно так:
+  
+  ```text
+  CONTAINER ID   IMAGE                     COMMAND                      CREATED        STATUS                            PORTS                               NAMES
 
-Inside `springboot-graphql-databases`, run the following Maven commands in different terminals:
-
-- **author-book-api**
-  ```
-  ./mvnw clean spring-boot:run --projects author-book-api \
-  -Dspring-boot.run.jvmArguments="-Dspring.datasource.username=authorbookuser -Dspring.datasource.password=authorbookpass"
+  397897ba0d2c   mongo:latest             "docker-entrypoint.s…"        1 day ago      Up 6 seconds (healthy)            0.0.0.0:27017->27017/tcp            mongodb
+  741799bffa36   openzipkin/zipkin:3.4.1  "start-zipkin"                2 day ago      Up 6 seconds (healthy)            9410/tcp, 0.0.0.0:9411->9411/tcp    zipkin
+  32f4deaccdd8   mysql:9.1.0              "docker-entrypoint.s…"        2 day ago      Up 6 seconds (healthy)            0.0.0.0:3306->3306/tcp, 33060/tcp   mysql
   ```
 
-- **book-review-api**
+1. Выполните команду для сборки приложения:
+
+  ```bash
+  ./build-docker-images.sh
   ```
-  ./mvnw clean spring-boot:run --projects book-review-api \
-  -Dspring-boot.run.jvmArguments="-Dspring.data.mongodb.username=bookreviewuser -Dspring.data.mongodb.password=bookreviewpass"
+
+4. Запустите приложение:
+
+  ```bash
+  ./start-apps.sh
+  ```
+
+    После запуска приложения вы увидите в терминале сообщение с указанием адреса, на котором работает графиеский интерфейс QraphiQL Playground:
+
+  ```text  
+       Application   | URL Type |                                   URL |
+     --------------- + -------- + ------------------------------------- |
+   author-book-api | GraphiQL |        http://localhost:8080/graphiql |
   ```
   
-## Run Applications as Docker containers
+## Как остановить приложение
 
-### Build Application's Docker Images
+Чтобы оставить приложение, выполните команду:
 
-In a terminal and inside `springboot-graphql-databases` root folder, run the following script:
-```
-./build-docker-images.sh
-```
-      
-### Application's environment variables
-    
-- **author-book-api**
-
-  | Environment Variable   | Description                                                                          |
-  |------------------------|--------------------------------------------------------------------------------------|
-  | `MYSQL_HOST`           | Specify host of the `MySQL` database to use (default `localhost`)                    |
-  | `MYSQL_PORT`           | Specify port of the `MySQL` database to use (default `3306`)                         |
-  | `ZIPKIN_HOST`          | Specify host of the `Zipkin` distributed tracing system to use (default `localhost`) |
-  | `ZIPKIN_PORT`          | Specify port of the `Zipkin` distributed tracing system to use (default `9411`)      |
-  | `BOOK_REVIEW_API_HOST` | Specify host of the `book-review-api` service (default `localhost`)                  |
-  | `BOOK_REVIEW_API_PORT` | Specify port of the `book-review-api` service (default `9080`)                       |
-
-- **book-review-api**
-
-  | Environment Variable | Description                                                                          |
-  |----------------------|--------------------------------------------------------------------------------------|
-  | `MONGODB_HOST`       | Specify host of the `MongoDB` database to use (default `localhost`)                  |
-  | `MONGODB_PORT`       | Specify port of the `MongoDB` database to use (default `27017`)                      |
-  | `ZIPKIN_HOST`        | Specify host of the `Zipkin` distributed tracing system to use (default `localhost`) |
-  | `ZIPKIN_PORT`        | Specify port of the `Zipkin` distributed tracing system to use (default `9411`)      |
-
-### Start Applications as Docker containers
-
-In a terminal and inside `springboot-graphql-databases` root folder, run following script:
-```
-./start-apps.sh
-```
-
-## Application's Link
-
-| Application     | URL Type | URL                                   |
-|-----------------|----------|---------------------------------------|
-| author-book-api | Swagger  | http://localhost:8080/swagger-ui.html |
-| author-book-api | GraphiQL | http://localhost:8080/graphiql        |
-| book-review-api | GraphiQL | http://localhost:9080/graphiql        |
-
-## How to use GraphiQL
-
-- **book-review-api**
-
-  1. In a browser, access http://localhost:9080/graphiql
-
-  2. Create a book and return its id:
-     ```
-     mutation {
-       createBook(bookInput: {title: "Getting Started With Roo", isbn: "9781449307905"}) {
-        id
-       }
-     }
-     ```
-
-  3. Add one review for the book created above, suppose the id is `5bd4bd4790e9f641b7388f23`:
-     ```
-     mutation {
-       addBookReview(bookId: "5bd4bd4790e9f641b7388f23", reviewInput: {reviewer: "Ivan Franchin", comment: "It is a very good book", rating: 5}) {
-         id
-       }
-     }
-     ```
-
-  4. Get all books stored in `book-review-api`, including their reviews:
-     ```
-     {
-       getBooks {
-         id
-         title
-         isbn
-         reviews {
-           comment
-           rating
-           reviewer
-           createdAt
-         }
-       }
-     }
-     ```
-
-- **author-book-api**
-
-  1. In a browser, access http://localhost:8080/graphiql
-
-  2. Create an author and return the author id:
-     ```
-     mutation {
-       createAuthor(authorInput: {name: "Josh Long"}) {
-         id
-       }
-     }
-     ```
-
-  3. Create a book and return the book id and author name:
-     > **Note**: while creating this book in `author-book-api`, we are setting the same ISBN, `9781449307905`, as we did when creating the book in `book-review-api`.
-     ```
-     mutation {
-       createBook(bookInput: {authorId: 1, isbn: "9781449307905", title: "Getting Started With Roo", year: 2020}) {
-         id
-         author {
-           name
-         }
-       }
-     }
-     ```
-
-  4. Get author by id and return some information about his/her books including book reviews from `book-review-api`:
-     > **Note**: as the book stored in `author-book-api` and `book-review-api` has the same ISBN, `9781449307905`, it's possible to retrieve the reviews of the book. Otherwise, an empty list will be returned in case `book-review-api` does not have a specific ISBN or the service is down. 
-     ```
-     {
-       getAuthorById(authorId: 1) {
-         name
-         books {
-           isbn
-           title
-           bookReview {
-             reviews {
-               reviewer
-               rating
-               comment
-               createdAt
-             }
-           }
-         }
-       }
-     }
-     ```
-
-  5. Update book title and return its id and new title:
-     ```
-     mutation {
-       updateBook(bookId: 1, bookInput: {title: "Getting Started With Roo 2"}) {
-         id
-         title
-       }
-     }
-     ```
-
-  6. Delete the author and return author id:
-     ```
-     mutation {
-       deleteAuthor(authorId: 1) {
-         id
-       }
-     }
-     ```
-
-## Useful links & commands
-
-- **Zipkin**
-
-  It can be accessed at http://localhost:9411
-
-- **MySQL monitor**
+  ```bash
+  ./stop-apps.sh
   ```
-  docker exec -it -e MYSQL_PWD=authorbookpass mysql mysql -uauthorbookuser --database authorbookdb
-  SHOW tables;
-  SELECT * FROM authors;
-  SELECT * FROM books;
-  ```
-  > Type `exit` to get out of MySQL monitor
 
-- **MongoDB shell**
-  ```
-  docker exec -it mongodb mongosh -u bookreviewuser -p bookreviewpass --authenticationDatabase bookreviewdb
-  use bookreviewdb;
-  db.books.find().pretty();
-  ```
-  > Type `exit` to get out of MongoDB shell
-
-## Shutdown
-
-- To stop applications:
-  - If they were started with `Maven`, go to the terminals where they are running and press `Ctrl+C`;
-  - If they were started as a Docker container, go to a terminal and, inside `springboot-graphql-databases` root folder, run the script below:
-    ```
-    ./stop-apps.sh
-    ```
-- To stop and remove docker compose containers, network and volumes, go to a terminal and, inside `springboot-graphql-databases` root folder, run the following command:
-  ```
+Чтобы остановить и удалить контейнеры приложения, выполните команду:
+  
+  ```bash
   docker compose down -v
   ```
-
-## Cleanup
-
-To remove the Docker images created by this project, go to a terminal and, inside `springboot-graphql-databases` root folder, run the following script:
-```
-./remove-docker-images.sh
-```
-
-## References
-
-- https://graphql.org/learn
-- https://www.pluralsight.com/resources/blog/guides/building-a-graphql-server-with-spring-boot
-- https://www.baeldung.com/spring-graphql
