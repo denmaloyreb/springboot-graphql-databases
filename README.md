@@ -83,4 +83,4 @@
   docker compose down -v
   ```
 
-Репозиторий создан на базе форка репозитория [https://github.com/ivangfr/springboot-graphql-databases](https://github.com/ivangfr/springboot-graphql-databases).
+> Репозиторий основан на форке [https://github.com/ivangfr/springboot-graphql-databases](https://github.com/ivangfr/springboot-graphql-databases).
