@@ -29,45 +29,45 @@
 
 1. Откройте терминал в корне этой папки и выполните команду:
 
-  ```shell
-  docker compose up -d
-  ```
+   ```shell
+   docker compose up -d
+   ```
 
-2. Убедитесь, что все контейнеры запущены. Для этого выполните команду:
+1. Убедитесь, что все контейнеры запущены. Для этого выполните команду:
   
-  ```shell
-  docker ps -a
-  ```
+   ```shell
+   docker ps -a
+   ```
   
-  Вывод команды должен выглядеть примерно так:
+   Вывод команды должен выглядеть примерно так:
   
-  ```text
-  CONTAINER ID   IMAGE                     COMMAND                      CREATED        STATUS                            PORTS                               NAMES
+   ```text
+   CONTAINER ID   IMAGE                     COMMAND                      CREATED        STATUS                            PORTS                               NAMES
 
-  397897ba0d2c   mongo:latest             "docker-entrypoint.s…"        1 day ago      Up 6 seconds (healthy)            0.0.0.0:27017->27017/tcp            mongodb
-  741799bffa36   openzipkin/zipkin:3.4.1  "start-zipkin"                2 day ago      Up 6 seconds (healthy)            9410/tcp, 0.0.0.0:9411->9411/tcp    zipkin
-  32f4deaccdd8   mysql:9.1.0              "docker-entrypoint.s…"        2 day ago      Up 6 seconds (healthy)            0.0.0.0:3306->3306/tcp, 33060/tcp   mysql
-  ```
+   397897ba0d2c   mongo:latest             "docker-entrypoint.s…"        1 day ago      Up 6 seconds (healthy)            0.0.0.0:27017->27017/tcp            mongodb
+   741799bffa36   openzipkin/zipkin:3.4.1  "start-zipkin"                2 day ago      Up 6 seconds (healthy)            9410/tcp, 0.0.0.0:9411->9411/tcp    zipkin
+   32f4deaccdd8   mysql:9.1.0              "docker-entrypoint.s…"        2 day ago      Up 6 seconds (healthy)            0.0.0.0:3306->3306/tcp, 33060/tcp   mysql
+   ```
 
 1. Выполните команду для сборки приложения:
 
-  ```bash
-  ./build-docker-images.sh
-  ```
+   ```bash
+   ./build-docker-images.sh
+   ```
 
-4. Запустите приложение:
+1. Запустите приложение:
 
-  ```bash
-  ./start-apps.sh
-  ```
+   ```bash
+   ./start-apps.sh
+   ```
 
-  После запуска приложения вы увидите в терминале сообщение с указанием адреса, на котором работает графиеский интерфейс QraphiQL Playground:
+   После запуска приложения вы увидите в терминале сообщение с указанием адреса, на котором работает графиеский интерфейс QraphiQL Playground:
 
-  ```text  
+   ```text  
        Application   | URL Type |                                   URL |
      --------------- + -------- + ------------------------------------- |
    author-book-api | GraphiQL |        http://localhost:8080/graphiql |
-  ```
+   ```
   
 ## Как остановить приложение
 
