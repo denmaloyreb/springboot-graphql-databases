@@ -64,9 +64,9 @@
    После запуска приложения вы увидите в терминале сообщение с указанием адреса, на котором работает графиеский интерфейс QraphiQL Playground:
 
    ```text  
-       Application   | URL Type |                                   URL |
-     --------------- + -------- + ------------------------------------- |
-     author-book-api | GraphiQL |        http://localhost:8080/graphiql |
+   Application     | URL Type |                                   URL |
+   --------------- + -------- + ------------------------------------- |
+   author-book-api | GraphiQL |        http://localhost:8080/graphiql |
    ```
   
 ## Как остановить приложение
