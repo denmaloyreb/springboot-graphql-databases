@@ -39,7 +39,7 @@
   docker ps -a
   ```
   
-    Вывод команды должен выглядеть примерно так:
+  Вывод команды должен выглядеть примерно так:
   
   ```text
   CONTAINER ID   IMAGE                     COMMAND                      CREATED        STATUS                            PORTS                               NAMES
