@@ -66,7 +66,7 @@
    ```text  
        Application   | URL Type |                                   URL |
      --------------- + -------- + ------------------------------------- |
-   author-book-api | GraphiQL |        http://localhost:8080/graphiql |
+     author-book-api | GraphiQL |        http://localhost:8080/graphiql |
    ```
   
 ## Как остановить приложение
